@@ -3,6 +3,7 @@ import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { signInStart, signInSuccess, signInFailure } from '../redux/user/userslice'
+import OAuth from "../components/OAuth"
 
 export default function Signin() {
 
@@ -81,6 +82,7 @@ export default function Signin() {
                 ) : "Sign Up"
               }
             </Button>
+            <OAuth />
           </form>
           <p className=" text-sm mt-5">
             Don't have an account?

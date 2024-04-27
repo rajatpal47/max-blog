@@ -1,7 +1,7 @@
 import { Button } from "flowbite-react";
 import { FcGoogle } from "react-icons/fc";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
-import { app } from "../filebase";
+import { app } from "../firebase";
 import { useDispatch } from "react-redux";
 import { signInSuccess } from "../redux/user/userslice";
 import { useNavigate } from "react-router-dom";

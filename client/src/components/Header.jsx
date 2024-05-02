@@ -1,9 +1,11 @@
 import { Avatar, Button, Dropdown, Navbar, TextInput} from "flowbite-react"
 import { Link, useLocation } from 'react-router-dom'
 import { IoSearch } from "react-icons/io5";
-import { FaMoon, FaSun } from "react-icons/fa";
+import { FaMoon, FaSun, FaUserCircle } from "react-icons/fa";
+import { MdOutlineLogout } from "react-icons/md";
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleTheme } from "../redux/theme/themeSlice";
+import { singoutSucess } from '../redux/user/userslice';
 
 
 export default function Header() {
@@ -11,6 +13,23 @@ export default function Header() {
   const {currentUser} = useSelector(state => state.user);
   const dispatch = useDispatch();
   const {theme} = useSelector((state) => state.theme)
+
+  const handleSignout = async () => {
+    try {
+      const res = await fetch(`/api/user/signout`, {
+        method: 'POST',
+      })
+      const data = await res.json();
+      if (!res.ok) {
+        console.log(data.message);
+      } else {
+        dispatch(singoutSucess());
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   return (
      <Navbar className='border-b-2'>
       <Link to="/" className=" self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white">
@@ -45,14 +64,15 @@ export default function Header() {
             }
           >
             <Dropdown.Header>
-              <span className=" block text-sm">@{currentUser.username}</span>
-              <span className=" block text-sm font-medium truncate">{currentUser.email}</span>
+              <span className=" block text-sm"><span className=" font-medium">User Name : </span>{currentUser.username}</span>
+              <span className=" block text-sm  truncate"><span className=" font-medium">Email : </span>{currentUser.email}</span>
             </Dropdown.Header>
             <Link to={'/dashboard?tab=profile'}>
-              <Dropdown.Item>Profile</Dropdown.Item>
+              <Dropdown.Item><FaUserCircle className="text-xl pr-1" />Profile</Dropdown.Item>
             </Link>
             <Dropdown.Divider/>
-            <Dropdown.Item>
+            <Dropdown.Item onClick={handleSignout}>
+              <MdOutlineLogout className="text-xl pr-1" />
               Sign out
             </Dropdown.Item>
           </Dropdown>

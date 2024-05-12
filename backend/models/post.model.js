@@ -15,7 +15,7 @@ const PostSchema = new mongoose.Schema(
             required: true,
             unique: true,
         },
-        imgae: {
+        image: {
             type: String,
             default: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTntTvfxUxxBbl0tM_utrWS2X6XiqU2_mJLLukFqsfbTw&s",
         },

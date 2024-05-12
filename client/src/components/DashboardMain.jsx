@@ -262,7 +262,7 @@ export default function DashboardMain() {
           <div className="text-center">
             <BsExclamationCircle className=" h-14 w-14 text-gray-500 dark:text-gray-200 mb-4 mx-auto" />
             <h3 className="mb-5 text-lg text-gray-600 dark:text-gray-400">
-              Are you sure to delete you account?
+              Are you sure to delete your account?
             </h3>
             <div className=" flex justify-center gap-4">
               <Button color="failure" onClick={handleDeleteUser}>

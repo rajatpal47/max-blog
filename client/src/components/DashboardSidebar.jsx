@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { singoutSucess } from "../redux/user/userslice";
 import { TiDocumentText } from "react-icons/ti";
 import { FaUsers } from "react-icons/fa6";
+import { MdOutlineInsertComment, MdOutlineDashboard } from "react-icons/md";
 import { useSelector } from "react-redux";
 
 export default function DashboardSidebar() {
@@ -41,6 +42,19 @@ export default function DashboardSidebar() {
     <Sidebar className=" w-full md:w-56">
       <Sidebar.Items>
         <Sidebar.ItemGroup className="flex flex-col gap-1">
+          {
+            currentUser && currentUser.isAdmin && (
+              <Link to="/dashboard?tab=dash">
+                <Sidebar.Item
+                  active={tab === "dash" || !tab}
+                  icon={MdOutlineDashboard}
+                  as="div"
+                >
+                  Dashboard
+                </Sidebar.Item>
+              </Link>
+            )
+          }
           <Link to="/dashboard?tab=profile">
             <Sidebar.Item
               active={tab === "profile"}
@@ -64,11 +78,18 @@ export default function DashboardSidebar() {
             </Link>
           )}
           {currentUser.isAdmin && (
-            <Link to="/dashboard?tab=users">
-              <Sidebar.Item active={tab === "users"} as="div" icon={FaUsers}>
-                Users
-              </Sidebar.Item>
-            </Link>
+            <>
+              <Link to="/dashboard?tab=users">
+                <Sidebar.Item active={tab === "users"} as="div"   icon={FaUsers}>
+                  Users
+                </Sidebar.Item>
+              </Link>
+              <Link to="/dashboard?tab=comments">
+                <Sidebar.Item active={tab === "comments"} as="div"   icon={MdOutlineInsertComment}>
+                  Comments
+                </Sidebar.Item>
+              </Link>
+            </>
           )}
           <Sidebar.Item
             onClick={handleSignout}

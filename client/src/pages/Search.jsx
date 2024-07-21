@@ -32,7 +32,7 @@ export default function Search() {
     const fetchPosts = async () => {
       setLoading(true);
       const searchQuery = urlParams.toString();
-      const res = await fetch(`/api/post/getposts?${searchQuery}`);
+      const res = await fetch(`/api/post/getposts?limit=8?${searchQuery}`);
       if (!res.ok) {
         setLoading(false);
         return;
@@ -147,7 +147,7 @@ export default function Search() {
         <div className="p-7 flex flex-wrap gap-4 mx-auto">
           {
             !loading && posts.length === 0 &&(
-              <p className="text-xl text-gray-500s">No posts found.</p>
+              <p className="text-xl text-gray-500">No posts found.</p>
             )
           }
           {
